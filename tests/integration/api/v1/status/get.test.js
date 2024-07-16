@@ -1,3 +1,9 @@
+import orchestrator from "tests/orchestrator";
+
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
+});
+
 // Making one API call to use in all status test
 const fetchStatus = async () => {
   const response = await fetch("http://localhost:3000/api/v1/status");
