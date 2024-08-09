@@ -1,0 +1,19 @@
+name: Automated Tests
+
+on: pull_request
+
+jobs:
+  jest:
+    name: Jest Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # baixa o codigo do repositorio em um pc limpo
+
+      - uses: actions/setup-node@v4 # configura a versao do node que sera usada
+        with:
+          node-version: "lts/hydrogen"
+      # `npm ci` instala dependencias na versao atual, congelada. `npm install` ira atualizar
+      # novas versoes das dependencias previstas no package-lock.json
+      - run: npm ci
+
+      - run: npm test
